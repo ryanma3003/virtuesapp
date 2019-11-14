@@ -11,19 +11,16 @@
 |
 */
 
+$router->post('register', 'AuthController@register');
 $router->post('auth/login', ['uses' => 'AuthController@authenticate']);
 
 $router->group(
-    ['middleware' => 'jwt.auth'],
+    ['middleware' => ['jwt.auth', 'cors'], 'prefix' => 'api/v1'],
     function() use ($router) {
-        $router->get('users', function() {
-            $users = \App\User::all();
-            return response()->json($users);
-        });
-        $router->get('question', function() {
-            $question_company = \App\Question_company::all();
-            return response()->json($question_company);
-        });
+        $router->get('question', 'Question_studentController@index');
+        $router->post('answer', 'Webuser_studentController@store');
+        $router->get('result', 'Webuser_studentController@show');
+        $router->get('profile', 'Kd_virtuesController@index');
     }
 );
 

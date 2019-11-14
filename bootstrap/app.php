@@ -58,15 +58,13 @@ $app->singleton(
 */
 
 // $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
-
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
+//     App\Http\Middleware\CorsMiddleware::class,
 // ]);
 
 $app->routeMiddleware([
     'jwt.auth' => App\Http\Middleware\JwtMiddleware::class,
+    'cors' => App\Http\Middleware\CorsMiddleware::class,
+    'auth' => App\Http\Middleware\Authenticate::class
 ]);
 
 /*
@@ -80,8 +78,8 @@ $app->routeMiddleware([
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
 /*

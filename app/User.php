@@ -17,9 +17,14 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      *
      * @var array
      */
+    protected $table = 'users_student';
     protected $fillable = [
         'name', 'email',
     ];
+    public function getId()
+    {
+    return $this->id;
+    }
 
     /**
      * The attributes excluded from the model's JSON form.
